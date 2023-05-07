@@ -1,0 +1,18 @@
+<button class="btn btn-danger m-2" type="button" data-toggle="collapse" data-target="#answer" aria-expanded="false" aria-controls="answer">
+    答えを表示
+</button>
+<div class="collapse m-4" id="answer">
+    <div class="card card-body text-left">
+        <h2>答え</h2>
+        <p class="text-danger">※答えは一例です。</p>
+        <figure class="bg-light">
+            &lt;script&gt;alert(document.cookie);&lt;/script&gt;
+        </figure>
+        <h2>解説</h2>
+        <p>ソースコードを確認すると、下記のように入力された文字列をエスケープ処理をせずに出力しています。</p>
+        <figure class="bg-light">
+            &lt;?php echo $xss ?&gt;
+        </figure>
+        <p>そのため、JavaScriptのコードを入力すると、レスポンスにそのままJavaScriptとして読み込まれてしまいます。</p>
+    </div>
+</div>

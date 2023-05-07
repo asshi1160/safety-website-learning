@@ -1,0 +1,18 @@
+<button class="btn btn-danger m-2" type="button" data-toggle="collapse" data-target="#answer" aria-expanded="false" aria-controls="answer">
+    答えを表示
+</button>
+<div class="collapse m-4" id="answer">
+    <div class="card card-body text-left">
+        <h2>答え</h2>
+        <p class="text-danger">※答えは一例です。</p>
+        <figure class="bg-light">
+            ../../../../etc/passwd
+        </figure>
+        <h2>解説</h2>
+        <p>ソースコードを確認すると、下記のように、入力されたファイル名をそのままcatコマンドで実行していることがわかります。</p>
+        <figure class="bg-light">
+            exec("cat ./{$file_name}", $tmp_res);
+        </figure>
+        <p>そのため、1つ前のディレクトリを表す「..」を何個か繋げることで、別のディレクトリにあるファイルへアクセスすることができる脆弱性を含んでしまっています。</p>
+    </div>
+</div>

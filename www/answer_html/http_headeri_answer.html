@@ -1,0 +1,19 @@
+<button class="btn btn-danger m-2" type="button" data-toggle="collapse" data-target="#answer" aria-expanded="false" aria-controls="answer">
+    答えを表示
+</button>
+<div class="collapse m-4" id="answer">
+    <div class="card card-body text-left">
+        <h2>答え</h2>
+        <p class="text-danger">※答えは一例です。</p>
+        URLにクエリストリングとして下記を入力します。
+        <figure class="bg-light">
+            url=http_headeri.php%0d%0aSet-Cookie:HTTP_HEADER_INJECTION=test
+        </figure>
+        <h2>解説</h2>
+        <p>ソースコードを確認すると、下記のように入力された文字を直接Locationヘッダの値として用いています。</p>
+        <figure class="bg-light">
+            header("Location: {$url}");
+        </figure>
+        <p>そのため、改行（%0d%0a）を含む文字列をリクエストすることで、改行以降の文字列を新たなヘッダと認識してしまいます。</p>
+    </div>
+</div>

